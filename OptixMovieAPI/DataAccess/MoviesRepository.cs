@@ -12,10 +12,15 @@ namespace DataAccess
             _appDbContext = appDbContext;
         }
 
-        public IEnumerable<Movie> GetMoviesByTitle(string? movieTitle, int? resultsSize, int? pageNumber)
+        public IEnumerable<Movie> GetMoviesByTitle(string? movieTitle, int? resultsSize, int? pageNumber, string? genre)
         {
             movieTitle ??= "";
-            IEnumerable<Movie> movies = _appDbContext.Movies.Where(x => x.Title.Contains(movieTitle)).OrderBy(x=>x.Id);
+            genre ??= "";
+
+            IEnumerable<Movie> movies = _appDbContext.Movies
+                                                        .Where(x => x.Title.Contains(movieTitle))
+                                                        .Where(x => x.Genre.Contains(genre))
+                                                        .OrderBy(x => x.Id);
 
             if (resultsSize is null)
             {
@@ -36,6 +41,10 @@ namespace DataAccess
 
         }
 
+        public IEnumerable<string> GetGenres()
+        {
+            return _appDbContext.Movies.Select(x => x.Genre).Distinct().OrderBy(x => x);
+        }
 
     }
 }
