@@ -4,34 +4,36 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
+   
     [ApiController]
     [Route("[controller]")]
     public class MovieController : ControllerBase
     {
 
         private readonly ILogger<MovieController> _logger;
-       
+        private readonly MoviesRepository _movieRepository;
 
-        public MovieController(ILogger<MovieController> logger)
+        public MovieController(ILogger<MovieController> logger, MoviesRepository movieRepository)
         {
             _logger = logger;
-            
+            _movieRepository = movieRepository;
         }
 
-        [HttpGet(Name = "GetMovieByTitle")]
-        public ActionResult<IEnumerable<Movie>> Get(string title)
+        /// <summary>
+        /// If nothing is specificied it will return the first 100 results.
+        /// </summary>
+        /// <param name="movieTitle"></param>
+        /// <param name="resultsSize"></param>
+        /// <param name="pageNumber"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult<IEnumerable<Movie>> Get(string? movieTitle, int? resultsSize, int? pageNumber)
         {
-         
-           
-                return new List<Movie>() { new Movie { Title = "onemovie" }, new Movie { Title = "twoMovie" } };
-                //return _appDbContext.Movies.Where(x => x.Title.Contains(title)).ToList();
-           
-
-
-
-
-
-            return Ok(new { title });
+            IEnumerable<Movie> movies = _movieRepository.GetMoviesByTitle(movieTitle, resultsSize, pageNumber);
+            return Ok(movies);
         }
+
+       
     }
 }
+
