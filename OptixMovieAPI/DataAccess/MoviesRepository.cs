@@ -3,7 +3,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace DataAccess
 {
-    public class MoviesRepository
+    public class MoviesRepository : IMoviesRepository
     {
         private readonly AppDbContext _appDbContext;
 
@@ -12,15 +12,20 @@ namespace DataAccess
             _appDbContext = appDbContext;
         }
 
+        public IEnumerable<Movie> GetMovies()
+        {
+            return _appDbContext.Movies;
+        }
+
         public IEnumerable<Movie> GetMoviesByTitle(string? movieTitle, int? resultsSize, int? pageNumber, string? genre)
         {
             movieTitle ??= "";
             genre ??= "";
 
-            IEnumerable<Movie> movies = _appDbContext.Movies
-                                                        .Where(x => x.Title.Contains(movieTitle))
-                                                        .Where(x => x.Genre.Contains(genre))
-                                                        .OrderBy(x => x.Id);
+            IEnumerable<Movie> movies = GetMovies()
+                                                    .Where(x => x.Title.Contains(movieTitle))
+                                                    .Where(x => x.Genre.Contains(genre))
+                                                    .OrderBy(x => x.Id);
 
             if (resultsSize is null)
             {

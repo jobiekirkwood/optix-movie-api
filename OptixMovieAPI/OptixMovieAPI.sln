@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API", "API\API.csproj", "{1
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{94F4F4D6-6270-4767-A5E1-1D5B0D65AE23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Tests", "API.Tests\API.Tests.csproj", "{0D16DE0B-8A68-4D71-9201-5F5423127690}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{94F4F4D6-6270-4767-A5E1-1D5B0D65AE23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94F4F4D6-6270-4767-A5E1-1D5B0D65AE23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94F4F4D6-6270-4767-A5E1-1D5B0D65AE23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D16DE0B-8A68-4D71-9201-5F5423127690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D16DE0B-8A68-4D71-9201-5F5423127690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D16DE0B-8A68-4D71-9201-5F5423127690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D16DE0B-8A68-4D71-9201-5F5423127690}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

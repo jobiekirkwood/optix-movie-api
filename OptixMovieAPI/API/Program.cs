@@ -8,7 +8,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 // Add services to the container.
-builder.Services.AddScoped<MoviesRepository>();
+builder.Services.AddScoped<IMoviesRepository, MoviesRepository>();
 
 
 builder.Services.AddControllers();

@@ -10,12 +10,10 @@ namespace API.Controllers
     public class MoviesController : ControllerBase
     {
 
-        private readonly ILogger<MoviesController> _logger;
-        private readonly MoviesRepository _movieRepository;
+        private readonly IMoviesRepository _movieRepository;
 
-        public MoviesController(ILogger<MoviesController> logger, MoviesRepository movieRepository)
+        public MoviesController(IMoviesRepository movieRepository)
         {
-            _logger = logger;
             _movieRepository = movieRepository;
         }
 
@@ -31,11 +29,14 @@ namespace API.Controllers
         {
             IEnumerable<Movie> movies = _movieRepository.GetMoviesByTitle(movieTitle, resultsSize, pageNumber, genre);
 
+            if (movies.Count() == 0)
+                return NoContent();
+
             if (orderByDate)
-                movies = movies.OrderBy(x => x.ReleaseDate);
+                movies = movies.OrderBy(x => x.ReleaseDate).ToList();
 
             if (orderByTitle)
-                movies = movies.OrderBy(x => x.Title);
+                movies = movies.OrderBy(x => x.Title).ToList();
 
             return Ok(movies);
         }
